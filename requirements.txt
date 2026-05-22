@@ -1,2 +1,24 @@
-fastapi
-uvicorn[standard]
+# ─────────────────────────────────────────────────────────────────────────
+# PRmate dependencies
+# ─────────────────────────────────────────────────────────────────────────
+# Maintained by hand. Only top-level (directly imported) packages listed.
+# Transitive dependencies are resolved by pip at install time.
+#
+# Versions are pinned exactly for reproducibility — your laptop, CI, and
+# Render all install identical code.
+#
+# Bump deliberately: when upgrading, change the version here, test locally,
+# verify the smoke tests still pass, then commit.
+# ─────────────────────────────────────────────────────────────────────────
+
+# ─── Configuration (used by app/config.py) ────────────────────────────────
+pydantic==2.13.4
+pydantic-settings==2.14.1
+
+# ─── Web framework (used by app/main.py from Lesson 12 onward) ────────────
+fastapi==0.121.2
+uvicorn[standard]==0.40.0
+
+# ─── GitHub integration (used by app/github/ from Lesson 4 onward) ────────
+httpx==0.28.1
+pyjwt[crypto]==2.10.1
