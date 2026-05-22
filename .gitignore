@@ -1,0 +1,63 @@
+# ─────────────────────────────────────────────────────────────────────────
+# PRmate .gitignore
+# ─────────────────────────────────────────────────────────────────────────
+# This file is your first line of defense against leaking secrets.
+# Every pattern here keeps something OUT of Git history.
+# Edit with care — adding a line later doesn't un-leak past commits.
+# ─────────────────────────────────────────────────────────────────────────
+
+# ─── Secrets (CRITICAL — never commit these) ──────────────────────────────
+# Any file matching these patterns will be invisible to Git.
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.b64
+secrets/
+!secrets/.gitignore        # Exception: the .gitignore INSIDE secrets/ is committed
+                           # (it ensures secrets/ exists but stays empty in Git)
+
+# ─── Python ───────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ─── Virtual environments ─────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ─── IDE / editor noise ───────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store              # macOS Finder metadata, harmless but ugly in diffs
+Thumbs.db              # Windows Explorer thumbnail cache
+
+# ─── PRmate runtime artifacts ─────────────────────────────────────────────
+data/*.db              # SQLite checkpointer database
+data/*.db-journal      # SQLite write-ahead log
+data/chroma/           # ChromaDB vector store files (V4+)
+!data/.gitkeep         # Exception: keep the folder visible in Git
+
+# ─── Logs and temp files ──────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+.pytest_cache/
+
+# ─── Build / packaging (we don't use these yet, but future-proof) ─────────
+dist/
+build/
+*.egg
