@@ -22,3 +22,8 @@ uvicorn[standard]==0.40.0
 # ─── GitHub integration (used by app/github/ from Lesson 4 onward) ────────
 httpx==0.28.1
 pyjwt[crypto]==2.10.1
+
+# ─── LangGraph (used by app/graph/ from Lesson 8 onward) ──────────────────
+# ─── LangGraph (used by app/graph/ from Lesson 8 onward) ──────────────────
+langgraph==1.0.10
+langgraph-checkpoint-sqlite==3.0.3
