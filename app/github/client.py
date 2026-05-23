@@ -212,7 +212,7 @@ async def _smoke_test() -> None:
       4. Fill in INSTALLATION_ID, REPO, PR_NUMBER below.
     """
     # ───── FILL THESE IN ─────
-    INSTALLATION_ID = 134927677
+    INSTALLATION_ID = 0
     REPO = "IdanRodri17/DocTor"
     PR_NUMBER = 1
     # ─────────────────────────
