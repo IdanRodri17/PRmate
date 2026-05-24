@@ -9,7 +9,7 @@ Pattern: Pydantic Settings (https://docs.pydantic.dev/latest/concepts/pydantic_s
 
 from functools import lru_cache
 from pathlib import Path
-
+from typing import Optional
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -91,6 +91,20 @@ class Settings(BaseSettings):
         default=Path("data/prmate.db"),
         description="Path to SQLite database file for LangGraph checkpointer",
     )
+    test_installation_id: Optional[int] = Field(
+        default=None,
+        description="GitHub App installation ID for smoke tests against a real PR",
+    )
+
+    test_repo_full_name: Optional[str] = Field(
+        default=None,
+        description="Repository full_name (owner/repo) for smoke tests",
+    )
+
+    test_pr_number: Optional[int] = Field(
+        default=None,
+        description="PR number on test_repo_full_name to use in smoke tests",
+    )
 
     # ─────────────────────────────────────────────────────────────────────────
     # Convenience properties
@@ -101,6 +115,18 @@ class Settings(BaseSettings):
     def is_production(self) -> bool:
         """True when running on Render (or any non-development environment)."""
         return self.environment.lower() == "production"
+
+    @property
+    def smoke_test_ready(self) -> bool:
+        """True iff all three smoke test fields are populated in .env."""
+        return all(
+            x is not None
+            for x in (
+                self.test_installation_id,
+                self.test_repo_full_name,
+                self.test_pr_number,
+            )
+        )
 
     @property
     def is_development(self) -> bool:
